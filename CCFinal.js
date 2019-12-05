@@ -25,7 +25,7 @@ function setup() {
 
 function draw(){
 	player.show();
-	switch(R) {//Defnitely going to be adding more ares for the game to load in
+	switch(R) {//Going to keep it simple but with more detail in each map for players to explore
 	case 1:
 		background(Map1);
 		break;
