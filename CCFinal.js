@@ -1,68 +1,93 @@
+let R = 1;
+let M = 1;
 var player;
+pathing = [];
 
-eventArray = []; //ideally this array will only be 4-5 units big since i think most decisions will be
+function preload(){
+	Map1 = loadImage('Map1.jpg');
+	Map2 = loadImage('Map2.jpg');
 
-function setup(){
-	//loadImage('Test_Map.jpg');
-	createCanvas(800, 400);
 	
 }
+function setup() {
+	createCanvas(800, 400);
+	player = new Player(400, 200);
+	
+	//if(keyPressed){
+		//if(keyCode === 'e'){
+			//R += 1
+		//}
+	//}
+	//background(mapArray[0]);
+
+}
+
 
 function draw(){
-	//image('Test_Map.jpg', 0, 0)
-	player = createSprite(400, 200, 50, 100); //not sure why it's rainbow colored but definitely will change that when i decide what the object will be
+	player.show();
+	switch(R) {//Defnitely going to be adding more ares for the game to load in
+	case 1:
+		background(Map1);
+		break;
 	
+	case 2:
+		background(Map2);
+		break;
+	}
 	
-	camera.position.x = player.position.x;
-	camera.position.y = player.position.y;
-	
-	fill(150);
-	if(eventArray[0] == 1){ //trying to make test if I can change rectangle color based on "decision"
-		fill(color(255));
+	//background();
+	//ellipse(mouseX, mouseY, 20, 20);
+	fill(0);
+	line(100, 0, 100, height);
+	line(700, 0, 700, height);
+	/*if(mouseX = width){
+		R += 1;
 	}
-	if(eventArray[0] == 0){ //testing color change for other chose color
-		fill(color(0));
+	if(mouseX = 0){
+		R -= 1;
 	}
-	rect(windowWidth/2, windowHeight/2, 20, 20); //really just a placeholder until the rest of the code is written
-		
-	drawSprite(player);
-	
-	print(eventArray.length); //just making sure the array is being apended to
-	
-	print(player.velocity.x); //until i get my official starting background, i wanted to make sure it was moving
-	print(player.velocity.y);
-	
-}
-
-function keyPressed(){ //Movement will be based on the arrow keys
-	if(keyCode === LEFT_ARROW){
-		player.velocity.x = -10;
+	if(R > 2){
+		R = 2;
 	}
-	if(keyCode === RIGHT_ARROW){
-		player.velocity.x = 10;
-	}
-	if(keyCode === UP_ARROW){
-		player.velocity.y = -10;
-	}
-	if(keyCode === DOWN_ARROW){
-		player.velocity.y = 10;
-		
-	}
-	else{
-		player.velocity.x = 0;
-		player.velocity.y = 0;
+	if(R < 1){
+		R = 1;
 	}
 }
-
-function keyTyped(){ //Testing adding to an array so that 0 will be one outcome and 1 will be the other
-	if(key === 'e' ||key === 'E'){
-		eventArray.push('1');
+*/
+}
+function mousePressed(){
+	if(mouseX > 700){
+		R +=1;
+		//print(R);
 	}
-	if(key === 'r' || key === 'R'){
-		eventArray.push('0');
+	if(mouseX < 100){
+		R -= 1;
+		//print(R);
+	}
+	if(R > 2){
+		R = 2;
+	}
+	if(R < 1){
+		R = 1;
 	}
 }
-
 function keyPressed(){
-	
+	for(var i =0; i< pathing.length; i++){
+		if(keyCode === 'd'){
+			pathing[i].right();
+			pathing[i].show();
+		}
+		if(keyCode === 'w'){
+			pathing[i].up();
+			pathing[i].show();
+		}
+		if(keyCode === 'a'){
+			pathing[i].left();
+			pathing[i].show();
+		}
+		if(keyCode === 's'){
+			pathing[i].down();
+			pathing[i].show();
+		}
+	}
 }
