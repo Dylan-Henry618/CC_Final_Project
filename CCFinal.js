@@ -1,93 +1,98 @@
-let R = 1;
-let M = 1;
-var player;
-pathing = [];
-
+M = 1;
 function preload(){
-	Map1 = loadImage('Map1.jpg');
-	Map2 = loadImage('Map2.jpg');
-
-	
+	map1 = loadImage('Map1.jpg');
+	map2 = loadImage('Map2.jpg');
+	Alliance = loadImage('Alliance.png');
+	Horde = loadImage('Horde.jpg');
+	NE = loadImage('Night_Elf.png');
+	Lo = loadImage('Undercity.png');
+	Iron = loadImage('Ironforge.png');
+	Storm = loadImage('Stormwind.jpg');
+	Thunder = loadImage('Thunder_Bluff.jpg');
+	Goblin = loadImage('Goblin_Banner.png');	
 }
+
 function setup() {
 	createCanvas(800, 400);
-	player = new Player(400, 200);
-	
-	//if(keyPressed){
-		//if(keyCode === 'e'){
-			//R += 1
-		//}
-	//}
-	//background(mapArray[0]);
-
 }
 
-
-function draw(){
-	player.show();
-	switch(R) {//Going to keep it simple but with more detail in each map for players to explore
-	case 1:
-		background(Map1);
-		break;
-	
-	case 2:
-		background(Map2);
-		break;
+function draw() {
+	if(M ==0){
+		background(255);
+		fill(0, 0, 120);
+		textSize(32);
+		text('Alliance', 175, 80);
+		rect(100, 100, 250, 250);
+		fill(160, 0, 0);
+		textSize(32);
+		text('Horde', 575, 80);
+		rect(500, 100, 250, 250);
+		fill(0);
+		triangle(0, 375, 35, 360, 35, 390);
+		rect(35, 370, 30, 10);
+		fill(255);
+		text('Human', 160, 150);
+		text('Dwarf', 160, 200);
+		text('Gnome', 160, 250);
+		text('Night Elf', 160, 300);
+		text('Orc', 575, 150);
+		text('Troll', 575, 200);
+		text('Tauren', 575, 250);
+		text('Undead', 575, 300);
+		
+	}
+	if(M == 1){
+		clear();
+		background(map1);
+		image(NE, 315, 30, 30, 30);
+		image(Horde, 450, 170, 30, 30);
+		image(Thunder, 350, 200, 30, 30);
+		image(Goblin, 440, 190, 30, 30);
+		fill(0);
+		rect(600, 0, 100, 50);
+		textSize(32);
+		fill(255);
+		text('Races', 603, 35);
+		
 	}
 	
-	//background();
-	//ellipse(mouseX, mouseY, 20, 20);
-	fill(0);
-	line(100, 0, 100, height);
-	line(700, 0, 700, height);
-	/*if(mouseX = width){
-		R += 1;
+	if(M == 2){
+		clear();
+		background(map2);
+		image(Lo, 325, 115, 30, 30);
+		image(Iron, 360, 210, 30, 30);
+		image(Storm, 330, 290, 30, 30);
+		fill(0);
+		rect(600, 0, 100, 50);
+		textSize(32);
+		fill(255);
+		text('Races', 603, 35);
 	}
-	if(mouseX = 0){
-		R -= 1;
-	}
-	if(R > 2){
-		R = 2;
-	}
-	if(R < 1){
-		R = 1;
-	}
-}
-*/
 }
 function mousePressed(){
-	if(mouseX > 700){
-		R +=1;
-		//print(R);
-	}
-	if(mouseX < 100){
-		R -= 1;
-		//print(R);
-	}
-	if(R > 2){
-		R = 2;
-	}
-	if(R < 1){
-		R = 1;
-	}
-}
-function keyPressed(){
-	for(var i =0; i< pathing.length; i++){
-		if(keyCode === 'd'){
-			pathing[i].right();
-			pathing[i].show();
+	if(M == 0){
+		if(mouseX < 50){
+			if(mouseY > 350){
+				M = 1;
+			}
 		}
-		if(keyCode === 'w'){
-			pathing[i].up();
-			pathing[i].show();
+	}
+	if(M == 1){
+		if(mouseX > 700){
+			M = 2;
 		}
-		if(keyCode === 'a'){
-			pathing[i].left();
-			pathing[i].show();
+	}
+	if(M == 2){
+		if(mouseX < 100){
+			M = 1;
 		}
-		if(keyCode === 's'){
-			pathing[i].down();
-			pathing[i].show();
+	}
+	if(mouseX > 600){
+		if(mouseX < 700){				
+			if(mouseY < 100){
+				clear();
+				M = 0;
+			}
 		}
 	}
 }
